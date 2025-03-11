@@ -6,6 +6,7 @@ app = Ursina()
 ground = Entity(scale=(15, 1, 15), y=-1, texture="grass", collider="box", model="cube")
 
 yo = player.berserker()
+enoemigo1 = enemy.zombie(yo)
 
 
 

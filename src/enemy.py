@@ -1,9 +1,9 @@
 from ursina import *
-from time import *
+import time
 import Coliders
 
 class enemy(Entity):
-    def __init__(hp, dmg, speed, self, player, attack_range):
+    def __init__(self, hp, dmg, speed, player, attack_range):
         super().__init__(model="cube",color=color.red)
         self.health = hp
         self.damage = dmg
@@ -11,11 +11,10 @@ class enemy(Entity):
         self.player = player
         self.attack_range = attack_range
 
-
     #mirar al jugador y dirigirse a el
-    def move(self):
+    def move(self,dt):
         self.look_at(self.player.position) 
-        self.forward * self.speed*time.dt
+        self.position += self.forward*self.speed*dt
 
     def attack(self):
         self.look_at(self.player.position)
@@ -24,14 +23,15 @@ class enemy(Entity):
     # si la distancia es mas grande del rango de ataque el enemigo se mueve al jugador y si no le ataca
     def update(self):
         if(distance(self, self.player) > self.attack_range):
-            self.move()
-        else:
-            self.attack()
+            dt=time.dt
+            self.move(dt)
+        #else:
+            #self.attack()
 
 
 class zombie(enemy):
-    def __init__():
-        super().__init__(health = 100, dmg = 20, speed = 3)
+    def __init__(self, player):
+        super().__init__(100, 20, 1, player,1)
 
     def attack(self):
         self.look_at(self.player.position)
