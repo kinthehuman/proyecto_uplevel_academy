@@ -1,6 +1,6 @@
 from ursina import *
 import time
-import Coliders
+import enemy_collider
 
 class enemy(Entity):
     def __init__(self, hp, dmg, speed, player, attack_range):
@@ -35,7 +35,7 @@ class zombie(enemy):
 
     def attack(self):
         self.look_at(self.player.position)
-        colider_zombie = Coliders.Colider(self.damage, "enemy", self.position, self.rotation, (self.scale[2], self.attack_range))
+        colider_zombie = enemy_collider.enemy_collider(self, "enemy")
     
     def update(self):
         super().update()
