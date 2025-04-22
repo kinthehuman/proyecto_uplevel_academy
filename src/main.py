@@ -15,5 +15,5 @@ enoemigo1 = enemy.zombie(yo)
 
 def input(key):
     if key == 'q':
-        app.quit
+        app.quit()
 app.run()

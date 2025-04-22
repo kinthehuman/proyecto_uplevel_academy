@@ -1,6 +1,5 @@
 from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
-import player_collider
 """
 self.health es la vida del player
 self.damage es el daño que hace el player
@@ -19,7 +18,7 @@ los valores de hp, dmg, spd, jmp y g son los valores iniciales de la clase Playe
 
 class Player(FirstPersonController):
     def __init__(self, hp, dmg, spd, jmp, g, r):
-       super().__init__()
+       super().__init__(model='cube', scale=(1,2,1), collider='box')
        self.health = hp
        self.damage = dmg
        self.speed = spd
@@ -31,10 +30,13 @@ class Player(FirstPersonController):
     def takeDamage(self, damage):
         self.health -= damage
         self.healthbar.text = self.health
+
+
+        '''
     def input(self,key):
         if key== "left mouse down":
-            attack=player_collider.player_collider(self)
-
+            #attack=player_collider.player_collider(self)
+'''
 
 class berserker(Player):
     def __init__(self):
