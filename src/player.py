@@ -1,5 +1,6 @@
 from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
+import enemy
 """
 self.health es la vida del player
 self.damage es el daño que hace el player
@@ -27,16 +28,28 @@ class Player(FirstPersonController):
        self.jump_up_duration = 1
        self.attack_range = r
        self.healthbar = Text(text=self.health, position=(-0.85, -0.4), scale=2, color=color.red)
+       
+       
+       
     def takeDamage(self, damage):
         self.health -= damage
         self.healthbar.text = self.health
 
 
-        '''
+        
     def input(self,key):
+        
         if key== "left mouse down":
-            #attack=player_collider.player_collider(self)
-'''
+            hit_info = boxcast(origin=self.position, direction=self.forward, distance=self.attack_range, thickness=(self.scale[2],0.1))
+            if hit_info:
+                targets = hit_info.entities
+                for i in range(len(targets)):
+                    if targets[i].isinstance(enemy.enemy):
+                        targets[i].takeDamage(self.damage)
+                        
+
+
+
 
 class berserker(Player):
     def __init__(self):
